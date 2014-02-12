@@ -1,0 +1,26 @@
+CROSS_HOST="x86_64-w64-mingw32"
+inherit cross
+
+NAME="mingw64-x86_64-libpaper"
+VERSION=1.1.24
+RELEASE=1
+CATEGORY="Devel"
+SUMMARY="Paper handling library for Win64 toolchain"
+DESCRIPTION="The libpaper paper-handling library automates recognition of
+many different paper types and sizes for programs that need to deal with
+printed output."
+HOMEPAGE="http://packages.debian.org/unstable/source/libpaper"
+SRC_URI="mirror://debian/pool/main/libp/libpaper/libpaper_${VERSION}.tar.gz"
+SRC_DIR="libpaper-${VERSION}"
+
+MAKEOPTS+=" LDFLAGS=-no-undefined"
+
+src_install() {
+	cd ${B}
+	cyginstall bin_PROGRAMS= man_MANS=
+
+	# we could provide a default papersize(5), but accessing it requires
+	# setting the PAPERCONF environment variable, so this is left as an
+	# exercise for the user.  The alternative is simply setting the
+	# PAPERSIZE environment variable instead.
+}
